@@ -17,4 +17,5 @@ Description:
 Library
   exposed-modules:   Benchmark.BinSearch
   build-depends:     base >= 4.4.0.0,
-                     ghc-prim, time 
+                     ghc-prim, time
+--                     criterion

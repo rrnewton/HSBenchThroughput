@@ -27,20 +27,28 @@ import Data.List
 import System.IO
 import Prelude hiding (min,max,log)
 
+-- TODO: It would be nice to use Criterion's Benchmarkable class.  But Criterion brings in A LOT of dependencies.
+-- import Criterion.Types (Benchmarkable)
 
 
 -- | Binary search for the number of inputs to a computation that
--- | makes it take a specified time in seconds.
+--   makes it take a specified time in seconds.
 --
 -- > binSearch verbose N (min,max) kernel
 --
--- | binSearch will find the right input size that results in a time
--- | between min and max, then it will then run for N trials and
--- | return the median (input,time-in-seconds) pair.
-binSearch :: Bool    -- ^ Verbose output
+-- binSearch will find the right input size that results in a time
+-- between min and max, then it will then run for N trials and
+-- return the median (input,time-in-seconds) pair.
+-- 
+-- For pure computations a recommended way to formulate the `IO ()` action 
+-- is using the `Pure` constructor and `Criterion.Types.Benchmarkable` class.
+binSearch :: 
+--             BenchMarkable b => 
+             Bool    -- ^ Verbose output
 	  -> Integer -- ^ Number of trials to run once input size is selected
 	  -> (Double,Double) -- ^ Desired execution time, expressed in seconds as a (Min,Max) range
-	  -> (Integer -> IO ())  -- ^ The computation to be measured
+ 	  -> (Integer -> IO ())  -- ^ The computation to be measured
+-- 	  -> (Integer -> b)  -- ^ The computation to be measured
 	  -> IO (Integer, Double)
 binSearch verbose trials (min,max) kernel =
   do 
@@ -125,8 +133,8 @@ toDouble :: Real a => a -> Double
 toDouble = fromRational . toRational
 
 
--- Could use cycle counters here.... but the point of this is to time
--- things on the order of a second.
+-- We could use cycle counters here.... but the point of this is to
+-- time things on the order of a second.
 timeit :: IO () -> IO NominalDiffTime
 timeit io = 
     do strt <- getCurrentTime
