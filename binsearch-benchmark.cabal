@@ -1,0 +1,20 @@
+Name:                binsearch-benchmark
+Version:             0.1
+License:             BSD3
+License-file:        LICENSE
+Author:              Ryan Newton
+Maintainer:          rrnewton@gmail.com
+Category:            Benchmarking
+Build-type:          Simple
+Cabal-version:       >=1.2
+
+Synopsis: Binary search over benchmark input sizes for a benchmarks of linear complexity.
+
+Description:
+
+ See module description in Benchmark.BinSearch.
+
+Library
+  exposed-modules:   Benchmark.BinSearch
+  build-depends:     base >= 4.4.0.0,
+                     ghc-prim, time 
