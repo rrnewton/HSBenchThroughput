@@ -1,4 +1,4 @@
-Name:                binsearch-benchmark
+Name:                benchmark-throughput
 Version:             0.1
 License:             BSD3
 License-file:        LICENSE
@@ -12,10 +12,14 @@ Synopsis: Binary search over benchmark input sizes for a benchmarks of linear co
 
 Description:
 
- See module description in Benchmark.BinSearch.
+ This package provides methods (binsearch and fork/kill) for measuring
+ the throughput rather than elapsed time of a computation.  That is,
+ how large of an input can function handle in a given time?
 
 Library
-  exposed-modules:   Benchmark.BinSearch
+  exposed-modules:   Benchmark.BinSearch, 
+                     Benchmark.TimeKill
+
   build-depends:     base >= 4.4.0.0,
                      ghc-prim, time
 --                     criterion
